@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainbox{
+            width: 100%;
+            height: 100vh;
+            border: 2px solid black;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190619/ourmid/pngtree-fancy-coffee-background-material-image_134209.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            
+        }
+        #box{
+            width: 70%;
+            height: 600px;
+            border: 4px solid red;
+           border-radius: 20px;
+        }
+        #heading{
+            text-align: center;
+        }
+         #line{
+            width:95%;
+            height: 3px;
+            background-color: red;
+            border: none;
+         }
+        .opt{
+            display: flex;
+            justify-content: center;
+        }
+        #options{
+            width: 95%;
+            height: 30px;
+           
+        }
+        .font{
+            font-size: larger;
+        }
+        .bar{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+        .button{
+            width: 140px;
+            height: 20px;
+            background-color: aliceblue;
+        }
+        #addbut{
+            display: flex;
+            justify-content: center;
+        }
+        .line2{
+            width:95%;
+            height: 2px;
+            background-color: gray;
+        border: none;
+         
+           
+        }
+        .font1{
+            font-size: larger;
+            width: 100%;
+           
+        }
+        #tbar{
+            display: flex;
+            justify-content: center;
+            font-size: larger;
+        
+        }
+        #print{
+            width: 95%;
+            height: 25px;
+            background-color: black;
+            color: aliceblue;
+        }
+        #rows{
+            overflow-y: auto;
+            max-height: 120px; 
+            display: flex;
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <div id="mainbox">
+        
+       <div id="box">
+        <h1 id="heading">CAFE INVOICE</h1>
+        <hr id="line">
+        <div class="opt">
+            
+            <select name="cafe" id="options" class="font">
+                <option value="" disabled selected>Select an item</option>
+                <option value="250" class="font" id="hcoffee">Hot Coffee</option>
+                <option value="100"class="font" id="chaii">English Tea</option>
+                <option value="500" class="font" id="ccoffee">Cold Coffee</option>
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="bar">
+            <div class="font"><b>PRICE</b></div>
+            <div class="font"><b>QUANTITY</b></div>
+            <div class="font"><b>AMOUNT</b></div>
+
+        </div>
+        <br>
+        <div class="bar">
+            <div class="button" id="pdiv"></div>
+            <input type="number" class="button" min="1" max="20" id="qty" onchange="calamount()">
+            <div class="button" id="adiv"></div>
+        </div>
+        <br>
+        <div id="addbut">
+            <button id="add" onclick="addproduct()">Add</button>
+        </div>
+        <br>
+        <hr id="line">
+        <div class="bar">
+            <div class="font"><b>PRODUCT</b></div>
+            <div class="font"><b>PRICE</b></div>
+            <div class="font"><b>QUANTITY</b></div>
+            <div class="font"><b>AMOUNT</b></div>
+         </div>
+
+
+        <hr class="line2">
+        <div class="bar" id="rows"> </div>
+        <hr class="line2">
+
+        <br>
+
+        <div id="tbar">
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Total price= </div>
+            <div id="tprice">0</div>
+        </div>
+
+        <br><br>
+
+        <div class="opt"><button id="print">PRINT</button></div>
+        
+
+
+        
+       </div>   
+    </div>
+
+
+   <script>
+   
+  const val1 = document.getElementById('options');
+  const val2 = document.getElementById('hcoffee');
+  const val3 = document.getElementById('chaii');
+  const val4 = document.getElementById('ccoffee');
+  const val5 = document.getElementById('pdiv');
+  const val6 = document.getElementById('adiv');
+  const val7 = document.getElementById('qty');
+  const val8 = document.getElementById('produ');
+  const val9 = document.getElementById('price');
+  const val10 = document.getElementById('quant');
+  const val11= document.getElementById('amount');
+  const val12= document.getElementById('add');
+
+  val1.addEventListener('input',()=>{
+    val5.innerHTML=val1.value;
+    
+  });
+
+  
+    val7.addEventListener('input',()=>{
+    
+    calamount();
+  });
+
+  
+
+  function calamount(){
+    let quantity=parseInt(val7.value);
+   const price=parseInt(val1.value);
+   
+   const amount=price*quantity;
+   val5.innerHTML=price;
+   val6.innerHTML=amount;
+ }
+
+
+
+ function addproduct()
+ {
+    const productselected= document.getElementById("options");
+    const selectedOption = productselected.options[productselected.selectedIndex]; 
+    const productName = selectedOption.text; 
+    const productquantity=parseInt(document.getElementById("qty").value);
+    const productprice=parseInt(productselected.value);
+    const aamount=productquantity*productprice;
+
+
+
+    // console.log(productName);
+    // console.log(productprice);
+    // console.log(productquantity);
+    // console.log(aamount);
+
+     let parent=document.createElement('div');
+     parent.style.display='flex';
+     parent.style.flexDirection='row';
+     parent.style.justifyContent='space-evenly';
+     parent.style.fontWeight='bold';
+     parent.style.fontSize="larger";
+     
+
+     let div1=document.createElement('div');
+     div1.innerHTML=productName;
+
+     let div2=document.createElement('div');
+     div2.innerHTML=productprice;
+
+     let div3=document.createElement('div');
+     div3.innerHTML=productquantity;
+
+     let div4=document.createElement('div');
+     div4.innerHTML=aamount;
+
+
+     parent.appendChild(div1);
+     parent.appendChild(div2);
+     parent.appendChild(div3);
+     parent.appendChild(div4);
+
+
+     let addrow=document.getElementById("rows")
+     addrow.appendChild(parent);
+
+
+    let totalprice=document.getElementById("tprice");
+    const currentTotal = parseInt(totalprice.innerHTML) ;
+       totalprice.innerHTML=aamount+currentTotal;
+
+
+
+     
+    productselected.value = "";  
+    document.getElementById("qty").value = "";  
+    document.getElementById("pdiv").innerHTML = "";  
+    document.getElementById("adiv").innerHTML = "";  
+
+
+ }
+    
+   </script>
+</body>
+</html>
